@@ -1,9 +1,11 @@
 from flask import Flask
 app = Flask(__name__)
 
+cache: dict = {}
+
 
 def recur_fibo(n: int) -> int:
-    cache: dict = {}
+
     # Check if the value is already cached
     if n in cache:
         return cache[n]
@@ -20,7 +22,7 @@ def recur_fibo(n: int) -> int:
 def fibo(num):
     result = {
         "user_input": num,
-        "Fibo_result": num-1 + num-2
+        "Fibo_result": recur_fibo(num)
     }
     return result
 
@@ -31,7 +33,8 @@ def is_odd(num):
         recur_fibo(num)) % 2 == 0 else "In sequence"
     result = {
         "user_input": num,
-        "result": is_odd_in_sequence
+        "result": is_odd_in_sequence,
+        "fibo_number": recur_fibo(num)
     }
     return result
 
