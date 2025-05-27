@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Create Blog</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Create a Blog Post</h1>
+    <form method="POST">
+        Title: <input type="text" name="title"><br><br>
+        Content:<br>
+        <textarea name="content" rows="5" cols="40"></textarea><br><br>
+        <input type="submit" value="Post">
+    </form>
+    <a href="/">Back to All Posts</a>
+</body>
+</html>
