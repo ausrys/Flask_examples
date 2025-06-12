@@ -51,7 +51,7 @@ def register():
         password = request.form['password']
         hashed_password = generate_password_hash(password)
         if User.query.filter_by(email=email).first():
-            flash("Email already exists.")
+            flash("Email already exists!")
             return render_template("register.html")
 
         new_user = User(email=email, password=hashed_password)
