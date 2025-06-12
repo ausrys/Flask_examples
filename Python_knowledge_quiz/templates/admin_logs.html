@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Logs</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 900px;
+            margin: auto;
+        }
+        h2 { text-align: center; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #aaa;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .section {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h2>📋 Admin Logs</h2>
+
+    <div class="section">
+        <h3>🔐 Last 10 User Actions</h3>
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Action</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for log in user_logs %}
+            <tr>
+                <td>{{ log.email }}</td>
+                <td>{{ log.action }}</td>
+                <td>{{ log.timestamp.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="section">
+        <h3>🧠 Last 10 Quiz Submissions</h3>
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Score</th>
+                <th>Percent</th>
+                <th>Passed</th>
+                <th>Duration</th>
+                <th>Submitted At</th>
+            </tr>
+            {% for log in quiz_logs %}
+            <tr>
+                <td>{{ log.email }}</td>
+                <td>{{ log.score }}/{{ log.total }}</td>
+                <td>{{ log.percent|round(2) }}%</td>
+                <td>{{ '✅' if log.passed else '❌' }}</td>
+                <td>{{ (log.duration_sec // 60) }}m {{ log.duration_sec % 60 }}s</td>
+                <td>{{ log.submitted_at.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

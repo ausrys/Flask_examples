@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Results</title>
+    <style>
+        body { font-family: Arial; padding: 30px; background: #f4f4f4; }
+        .result { margin-bottom: 20px; padding: 20px; background: #fff; border-radius: 10px; }
+        .correct { color: green; }
+        .wrong { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Your Score: {{ score }}/{{ total }} ({{ percent | round(2) }}%)</h2>
+        {% if passed %}
+    <h3 style="color: green;">✅ Congratulations! You passed the test.</h3>
+        {% else %}
+    <h3 style="color: red;">❌ Sorry, you did not pass. Minimum 80% required.</h3>
+        {% endif %}
+    <hr>
+    {% for res in results %}
+        <div class="result">
+            <p><strong>Q{{ loop.index }}:</strong> {{ res.question }}</p>
+            <p>Your Answer: 
+                <span class="{{ 'correct' if res.is_correct else 'wrong' }}">{{ res.selected }}</span>
+            </p>
+            {% if not res.is_correct %}
+                <p>✔️ Correct Answer: <span class="correct">{{ res.correct }}</span></p>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

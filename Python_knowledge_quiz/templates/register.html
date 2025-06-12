@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <style>body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .link {
+            margin-top: 15px;
+            text-align: center;
+        }</style>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Register</h2>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for msg in messages %}
+                <li style="color:red;">{{ msg }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        <form action="/register" method="POST">
+            <label>Email:</label><br>
+            <input type="email" name="email" required><br>
+            <label>Password:</label><br>
+            <input type="password" name="password" required><br>
+            <input type="submit" value="Register">
+        </form>
+        <div class="link">
+            <p>Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>
